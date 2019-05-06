@@ -1,0 +1,35 @@
+1. Run the following command to create a maven project:
+	'mvn archetype:generate  -DarchetypeArtifactId=maven-archetype-quickstart'.
+
+    The program will ask you to enter artifactID, groupId, package name and version number
+
+2. Inside the newly created folder, there should be a file called pom.xml. Open the file and add the following lines  between <dependencies></dependencies> tags to add spark.
+ 
+<dependency>
+        <groupId>org.apache.spark</groupId>
+        <artifactId>spark-core_2.11</artifactId>
+        <version>2.4.0</version>
+    </dependency>
+<dependency>
+    <groupId>org.apache.spark</groupId>
+    <artifactId>spark-sql_2.11</artifactId>
+    <version>2.4.0</version>
+</dependency>
+<dependency>
+    <groupId>org.apache.spark</groupId>
+    <artifactId>spark-mllib_2.11</artifactId>
+    <version>2.4.0</version>
+</dependency>
+
+3. Add the source code in the src folder.
+
+
+4. Run 'mvn package' to create the jar executable, this will create a jar in the 'target' folder 
+
+
+5. To run the jar run the following command 'spark-submit --class packagename.classname  <path to jar>'
+	eg if your class is located in src/main/java/sparkapp/App.java and target jar is call EFG.jar, then the command would be
+
+	'spark-submit --class sparkapp.App --master local target/EFG.jar'
+
+NOTE:an example project called sparkjob is created for reference

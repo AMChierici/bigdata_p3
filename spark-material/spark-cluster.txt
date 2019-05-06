@@ -1,0 +1,22 @@
+To create a cluster we first need to be able to perform password less ssh on all systems so that the machine can communicate with each other. 
+In order to do this, the following steps need to be done only on the master machine:
+
+ssh-keygen -t rsa -P ""
+
+This will create a file ~/.ssh/id_rsa.pub in master. Copy contents of this file to ~/.ssh/authorized_keys in all slave machines.
+
+We need to configure the master in order to communicate with all the slaves, do these steps:
+
+1.go to the spark/conf folder
+2.run this command `cp spark-env.sh.template spark-env.sh`
+3.open spark-env.sh and add the following lines
+    a.export SPARK_LOCAL_IP=<enter Master machine IP>           
+    b.export SPARK_MASTER_HOST=<enter Master machine IP>
+
+On master machine, create a new file called slaves in spark/conf folder and enter the following lines. Enter all slave machine IPs
+    <enter Master machine hostname(eg F4Linux1)>  
+    <enter slave machine hostname (egF4Linux2> 
+
+All the setup has been done, to start the cluster run the spark/sbin/start-all.sh executable on master machine
+
+Check the cluster is running properly by using the browser and going to the following url http://<master-ip>:8080 and checking if all master and slave urls are present
